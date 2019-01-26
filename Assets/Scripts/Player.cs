@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -28,10 +29,35 @@ public class Player : MonoBehaviour
     public Text txt_Temperature;
     private int startCoordX;
 
+    [SerializeField]
+    GameObject DeathScreen;
+    [SerializeField]
+    Text txt_DeathMessage;
+    [SerializeField]
+    Button restart;
+
+
+    [SerializeField]
+    string[] messagePit;
+    [SerializeField]
+    string[] messageFood;
+    [SerializeField]
+    string[] messageFreezing;
+    [SerializeField]
+    string[] messageOverheating;
+
+
+
+
+    void Awake()
+    {
+        DeathScreen.SetActive(false);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        restart.onClick.AddListener(Retry);
         rigidbod = GetComponent<Rigidbody2D>();
         startTime = Time.time;
         Food = 100;
@@ -66,6 +92,7 @@ public class Player : MonoBehaviour
         }
 
         speed = Input.GetAxis("Horizontal") * acceleration;
+
         rigidbod.velocity = new Vector2(speed - windSpeed, rigidbod.velocity.y);
 
     }
@@ -94,7 +121,7 @@ public class Player : MonoBehaviour
 
         if(Food <= 0)
         {
-            //Kill player and show death screen
+            KillPlayer("Starvation");
         }
 
     }
@@ -111,24 +138,12 @@ public class Player : MonoBehaviour
         //Kills the player :)
         if(Temprature <= 21 && !isNearFire)
         {
-            //Kill player and show death screen
+            KillPlayer("Hypothermia");
         }
 
         if(Temprature >= 44 && isNearFire)
         {
-           //Kill player and show death screen
-        }
-    }
-
-    //Check if player collides with apple
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag == "Apple")
-        {
-            Destroy(col.gameObject);
-            Debug.Log("I got them apples");
-            //Gives more food and keeps value between 0 and 100
-            Food = Mathf.Clamp(Food + 5, 0f, 100f);
+            KillPlayer("Hyperthermia");
         }
     }
 
@@ -139,6 +154,19 @@ public class Player : MonoBehaviour
         {
             isNearFire = true;
         }
+
+        if(col.gameObject.tag == "Pit")
+        {
+            KillPlayer("Pit");
+        }
+
+        if (col.gameObject.tag == "Apple")
+        {
+            Destroy(col.gameObject);
+            Debug.Log("I got them apples");
+            //Gives more food and keeps value between 0 and 100
+            Food = Mathf.Clamp(Food + 5, 0f, 100f);
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -148,6 +176,42 @@ public class Player : MonoBehaviour
         {
             isNearFire = false;
         }
+    }
+
+    void KillPlayer(string reason)
+    {
+
+        DeathScreen.SetActive(true);
+        windSpeed = 0;
+        acceleration = 0;
+        jumpSpeed = 0;
+
+        if(reason == "Pit")
+        {
+
+        }
+
+        if(reason == "Starvation")
+        {
+            txt_DeathMessage.text = messageFood[Random.Range(0, messageFood.Length)];
+        }
+
+        if(reason == "Hypothermia")
+        {
+            txt_DeathMessage.text = messageFreezing[Random.Range(0, messageFreezing.Length)];
+
+        }
+
+        if(reason == "Hyperthermia")
+        {
+            txt_DeathMessage.text = messageOverheating[Random.Range(0, messageOverheating.Length)];
+        }
+
+    }
+
+    void Retry()
+    {
+        SceneManager.LoadScene("Bjo");
     }
 
 }
