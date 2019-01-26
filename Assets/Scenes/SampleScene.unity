@@ -26942,6 +26942,9 @@ MonoBehaviour:
   windSpeed: 0.5
   acceleration: 30
   rayGround: {fileID: 0}
+  txt_Score: {fileID: 0}
+  txt_Health: {fileID: 0}
+  txt_Temperature: {fileID: 0}
 --- !u!50 &1056143829
 Rigidbody2D:
   serializedVersion: 4
