@@ -658,7 +658,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 76.61, y: 1}
+  m_Size: {x: 200, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -696,13 +696,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 76.61, y: 1}
+    newSize: {x: 200, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 76.61, y: 1}
+  m_Size: {x: 200, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1132775853
 GameObject:
@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 1132775854}
   - component: {fileID: 1132775856}
   m_Layer: 0
-  m_Name: Background_3_trees (1)
+  m_Name: Background_3_trees
   m_TagString: Trees
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +733,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1682068486}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1132775856
 SpriteRenderer:
@@ -1226,7 +1226,7 @@ GameObject:
   - component: {fileID: 1438880287}
   - component: {fileID: 1438880288}
   m_Layer: 0
-  m_Name: Background_2_hills
+  m_Name: Background_2_hills (2)
   m_TagString: Hills
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1244,7 +1244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1682068486}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1438880288
 SpriteRenderer:
@@ -1492,7 +1492,7 @@ GameObject:
   - component: {fileID: 1608343425}
   - component: {fileID: 1608343426}
   m_Layer: 0
-  m_Name: Background_2_hills (2)
+  m_Name: Background_2_hills
   m_TagString: Hills
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1510,7 +1510,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1682068486}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1608343426
 SpriteRenderer:
@@ -1667,12 +1667,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.4248492, z: -0.30078125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1829484448}
   - {fileID: 1132775854}
+  - {fileID: 1829484448}
   - {fileID: 208711823}
-  - {fileID: 1438880287}
-  - {fileID: 1245938878}
   - {fileID: 1608343425}
+  - {fileID: 1245938878}
+  - {fileID: 1438880287}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1691,6 +1691,8 @@ MonoBehaviour:
   player: {fileID: 2103953840983259073}
   speedTrees: 0.005
   speedHills: 0.0005
+  trees: []
+  cam: {fileID: 0}
 --- !u!1 &1684476071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,7 +1823,7 @@ GameObject:
   - component: {fileID: 1829484448}
   - component: {fileID: 1829484447}
   m_Layer: 0
-  m_Name: Background_3_trees
+  m_Name: Background_3_trees (1)
   m_TagString: Trees
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1887,7 +1889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1682068486}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1835947837
 PrefabInstance:

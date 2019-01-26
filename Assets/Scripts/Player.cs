@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     float timeNow;
 
     bool isNearFire = false;
+    bool isDead = false;
 
     public Text txt_Score;
     public Text txt_Health;
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour
     {
         Food -= (timeNow / 500);
 
-        if(Food <= 0)
+        if(Food <= 0 && !isDead)
         {
             KillPlayer("Starvation");
         }
@@ -136,12 +137,12 @@ public class Player : MonoBehaviour
         } else Temprature += 0.005f;
  
         //Kills the player :)
-        if(Temprature <= 21 && !isNearFire)
+        if(Temprature <= 21 && !isNearFire && !isDead)
         {
             KillPlayer("Hypothermia");
         }
 
-        if(Temprature >= 44 && isNearFire)
+        if(Temprature >= 44 && isNearFire && !isDead)
         {
             KillPlayer("Hyperthermia");
         }
