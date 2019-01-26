@@ -48,21 +48,21 @@ public class Player : MonoBehaviour
 
 
 
-    /*
+    
     void Awake()
     {
         DeathScreen.SetActive(false);
-    }*/
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbod = GetComponent<Rigidbody2D>();
-        restart.onClick.AddListener(Retry);
         startTime = Time.time;
         Food = 100;
         Temprature = 37;
         startCoordX = (int)transform.position.x;
+        restart.onClick.AddListener(Retry);
     }
 
     // Update is called once per frame
