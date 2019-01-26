@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -22,6 +23,11 @@ public class Player : MonoBehaviour
 
     bool isNearFire = false;
 
+    public Text txt_Score;
+    public Text txt_Health;
+    public Text txt_Temperature;
+    private int startCoordX;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +36,7 @@ public class Player : MonoBehaviour
         startTime = Time.time;
         Food = 100;
         Temprature = 37;
+        startCoordX = (int)transform.position.x;
     }
 
     // Update is called once per frame
@@ -41,6 +48,14 @@ public class Player : MonoBehaviour
         Wind();
         FoodDecrease();
         TempratureHandler();
+        updateUI();
+    }
+
+    void updateUI() 
+    {
+        txt_Score.text = "Score: " + ((int)transform.position.x-startCoordX);
+        txt_Health.text = "Health: " + (int)Food;
+        txt_Temperature.text = "Temperature: " + (int)Temprature;
     }
 
     void Movement()
