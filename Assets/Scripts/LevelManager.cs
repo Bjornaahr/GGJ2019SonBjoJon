@@ -73,7 +73,6 @@ public class LevelManager : MonoBehaviour
             box2d.isTrigger = true;
 
             Animation anim = fire.AddComponent<Animation>();
-            anim.
 
 
             fire.transform.position = new Vector3(hit.point.x, hit.point.y+0.5f);
