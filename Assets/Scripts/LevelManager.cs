@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
     public int fireSpawnInterval = 15;
     public int spawnIntervalIncrease = 3; 
     public int minSpawnHeight = 2; //should be slightly above the ground  
-    public float appleScale = 3f;
-    public float fireScale = 3f;
+    public float appleScale = 1f;
+    public float fireScale = 1f;
 
     public static int LAYER_COLLECTIBLES = 31;
 
@@ -21,11 +21,21 @@ public class LevelManager : MonoBehaviour
     {
         int firstApple = Random.Range(1, 10);
         int firstFire = Random.Range(5, 15);
+        List<int> spawnPostions = new List<int>();
         for(int i = firstApple; i < lvlWidth; i+= appleSpawnInterval) 
         {
             appleSpawnInterval += spawnIntervalIncrease;
             int randomDeviation = Random.Range(-3, 3);
             i += randomDeviation;
+
+            if(spawnPostions.Contains(i)) 
+            {
+                i += appleSpawnInterval;
+                appleSpawnInterval += spawnIntervalIncrease;
+                continue; 
+            }
+
+            spawnPostions.Add(i);
 
             int randomHeight = Random.Range(minSpawnHeight, lvlHeight);
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
@@ -53,6 +63,15 @@ public class LevelManager : MonoBehaviour
             fireSpawnInterval += spawnIntervalIncrease;
             int randomDeviation = Random.Range(-3, 3);
             i += randomDeviation;
+
+            if (spawnPostions.Contains(i))
+            {
+                i += fireSpawnInterval;
+                fireSpawnInterval += spawnIntervalIncrease;
+                continue;
+            }
+
+            spawnPostions.Add(i);
 
             int randomHeight = Random.Range(minSpawnHeight, lvlHeight);
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
