@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public int fireSpawnInterval = 15;
     public int spawnIntervalIncrease = 3; 
     public int minSpawnHeight = 2; //should be slightly above the ground  
+    public float appleScale = 3f;
+    public float fireScale = 3f;
 
     public static int LAYER_COLLECTIBLES = 31;
 
@@ -33,7 +35,7 @@ public class LevelManager : MonoBehaviour
             apple.tag = "Apple";
             apple.layer = LAYER_COLLECTIBLES;
 
-            apple.transform.localScale = new Vector3(3f, 3f, 0f);
+            apple.transform.localScale = new Vector3(appleScale, appleScale, 0f);
 
             SpriteRenderer spriteRend = apple.AddComponent<SpriteRenderer>();
             Sprite s = Resources.Load<Sprite>("Sprites/apple");
@@ -60,7 +62,7 @@ public class LevelManager : MonoBehaviour
             fire.tag = "Fire";
             fire.layer = LAYER_COLLECTIBLES;
 
-            fire.transform.localScale = new Vector3(3f, 3f, 0f);
+            fire.transform.localScale = new Vector3(fireScale, fireScale, 0f);
 
             SpriteRenderer spriteRend = fire.AddComponent<SpriteRenderer>();
             Sprite s = Resources.Load<Sprite>("Sprites/Bonfire");
