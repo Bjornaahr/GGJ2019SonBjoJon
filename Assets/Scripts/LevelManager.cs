@@ -24,17 +24,19 @@ public class LevelManager : MonoBehaviour
             int randomDeviation = Random.Range(-3, 3);
             i += randomDeviation;
 
-            GameObject apple = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            DestroyImmediate(apple.GetComponent<BoxCollider>());
+            GameObject apple = new GameObject();
+
             apple.tag = "Apple";
             apple.layer = LAYER_COLLECTIBLES;
 
+            apple.transform.localScale = new Vector3(3f, 3f, 0f);
 
-            //TODO: set apple texture 
-            Material mat = apple.GetComponent<Renderer>().material;
-            mat.color = Color.green;
+            SpriteRenderer spriteRend = apple.AddComponent<SpriteRenderer>();
+            Sprite s = Resources.Load<Sprite>("Sprites/apple");
+            spriteRend.sprite = s;
 
             BoxCollider2D box2d = apple.AddComponent<BoxCollider2D>();
+            box2d.size = s.bounds.size;
 
             //Apple should fall from the sky and land on smth -> ground / platform 
             Rigidbody2D rBody = apple.AddComponent<Rigidbody2D>();
@@ -54,17 +56,19 @@ public class LevelManager : MonoBehaviour
             int randomDeviation = Random.Range(-3, 3);
             i += randomDeviation;
 
-            GameObject fire = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            DestroyImmediate(fire.GetComponent<BoxCollider>());
+            GameObject fire = new GameObject();
+
             fire.tag = "Fire";
             fire.layer = LAYER_COLLECTIBLES;
 
+            fire.transform.localScale = new Vector3(3f, 3f, 0f);
 
-            //TODO: set apple texture 
-            Material mat = fire.GetComponent<Renderer>().material;
-            mat.color = Color.red;
+            SpriteRenderer spriteRend = fire.AddComponent<SpriteRenderer>();
+            Sprite s = Resources.Load<Sprite>("Sprites/Bonfire");
+            spriteRend.sprite = s;
 
             BoxCollider2D box2d = fire.AddComponent<BoxCollider2D>();
+            box2d.size = s.bounds.size;
 
             //Apple should fall from the sky and land on smth -> ground / platform 
             Rigidbody2D rBody = fire.AddComponent<Rigidbody2D>();
