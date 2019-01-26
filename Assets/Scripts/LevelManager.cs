@@ -30,8 +30,8 @@ public class LevelManager : MonoBehaviour
 
             if(spawnPostions.Contains(i)) 
             {
-                i += appleSpawnInterval;
-                appleSpawnInterval += spawnIntervalIncrease;
+                i -= appleSpawnInterval;
+                appleSpawnInterval -= spawnIntervalIncrease;
                 continue; 
             }
 
@@ -39,6 +39,12 @@ public class LevelManager : MonoBehaviour
 
             int randomHeight = Random.Range(minSpawnHeight, lvlHeight);
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
+
+            if(hit.point == new Vector2(i, randomHeight)) {
+                i -= appleSpawnInterval;
+                appleSpawnInterval -= spawnIntervalIncrease;
+                continue;
+            }
 
             GameObject apple = new GameObject();
 
@@ -66,8 +72,8 @@ public class LevelManager : MonoBehaviour
 
             if (spawnPostions.Contains(i))
             {
-                i += fireSpawnInterval;
-                fireSpawnInterval += spawnIntervalIncrease;
+                i -= fireSpawnInterval;
+                fireSpawnInterval -= spawnIntervalIncrease;
                 continue;
             }
 
@@ -76,6 +82,12 @@ public class LevelManager : MonoBehaviour
             int randomHeight = Random.Range(minSpawnHeight, lvlHeight);
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
 
+            if (hit.point == new Vector2(i, randomHeight)){
+                Debug.Log("alarm");
+                i -= fireSpawnInterval;
+                fireSpawnInterval -= spawnIntervalIncrease;
+                continue;
+            }
             GameObject fire = new GameObject();
 
             fire.tag = "Fire";
