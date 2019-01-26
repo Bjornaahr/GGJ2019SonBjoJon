@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     float startTime;
     float timeNow;
 
+    bool isNearFire = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
         CheckGround();
         Wind();
         FoodDecrease();
-        TempratureDecrease();
+        TempratureHandler();
     }
 
     void Movement()
@@ -51,14 +53,13 @@ public class Player : MonoBehaviour
         speed = Input.GetAxis("Horizontal") * acceleration;
         rigidbod.velocity = new Vector2(speed - windSpeed, rigidbod.velocity.y);
 
-        //rigidbod.AddForce(transform.right * -windSpeed);
-
     }
 
     void CheckGround()
     {
+        //Sends a raystraight down 0.1 blocks
         RaycastHit2D hitDown = Physics2D.Raycast(rayGround.position, Vector2.down, 0.1f);
-
+        //Chcks if ray hits ground
         if (hitDown)
         {
             isGrounded = true;
@@ -75,12 +76,63 @@ public class Player : MonoBehaviour
     void FoodDecrease()
     {
         Food -= (timeNow / 500);
+
+        if(Food <= 0)
+        {
+            //Kill player and show death screen
+        }
+
     }
 
     //Decreases temprature while not near a fireplace
-    void TempratureDecrease()
+    void TempratureHandler()
     {
-        Temprature -= (timeNow / 5000);
+        //Check if player is near fire and raise or lower temp
+        if (!isNearFire)
+        {
+            Temprature -= (timeNow / 5000);
+        } else Temprature += 0.005f;
+ 
+        //Kills the player :)
+        if(Temprature <= 21 && !isNearFire)
+        {
+            //Kill player and show death screen
+        }
+
+        if(Temprature >= 44 && isNearFire)
+        {
+           //Kill player and show death screen
+        }
+    }
+
+    //Check if player collides with apple
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Apple")
+        {
+            Destroy(col.gameObject);
+            Debug.Log("I got them apples");
+            //Gives more food and keeps value between 0 and 100
+            Food = Mathf.Clamp(Food + 5, 0f, 100f);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        //Check if player if near fire
+        if (col.gameObject.tag == "Fire")
+        {
+            isNearFire = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        //Checks when player leaves fire
+        if (col.gameObject.tag == "Fire")
+        {
+            isNearFire = false;
+        }
     }
 
 }
