@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     float speed, jumpSpeed, windSpeed, acceleration;
-
+    [SerializeField]
     Rigidbody2D rigidbod;
     bool isGrounded = true;
 
@@ -48,17 +48,17 @@ public class Player : MonoBehaviour
 
 
 
-
+    /*
     void Awake()
     {
         DeathScreen.SetActive(false);
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
     {
-        restart.onClick.AddListener(Retry);
         rigidbod = GetComponent<Rigidbody2D>();
+        restart.onClick.AddListener(Retry);
         startTime = Time.time;
         Food = 100;
         Temprature = 37;
