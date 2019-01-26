@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
 
     void Retry()
     {
-        SceneManager.LoadScene("Bjo");
+        SceneManager.LoadScene("SampleScene");
     }
 
 }
