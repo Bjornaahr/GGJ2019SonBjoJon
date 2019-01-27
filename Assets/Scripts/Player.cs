@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         rigidbod = GetComponent<Rigidbody2D>();
         startTime = Time.time;
         Food = 100;
-        Temprature = 100;
+        Temprature = 89;
         startCoordX = (int)transform.position.x;
         ReadDeath();
         restart.onClick.AddListener(Retry);
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
             if (!isNearFire)
             {
                 Temprature -= (timeNow / 1000);
-            } else Temprature += 0.005f;
+            } else Temprature += 0.01f;
         }
  
         //Kills the player :)
