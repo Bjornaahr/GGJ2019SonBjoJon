@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public AudioSource appleSource;
     public AudioClip wilheimSound;
     public AudioSource wilheimSource;
+    public AudioClip walkingSound;
+    public AudioSource walkingSource;
 
     [SerializeField]
     float speed, jumpSpeed, windSpeed, acceleration;
@@ -34,8 +36,6 @@ public class Player : MonoBehaviour
     bool isDead = false;
 
     public Text txt_Score;
-    public Text txt_Health;
-    public Text txt_Temperature;
     private int startCoordX;
 
     [SerializeField]
@@ -77,6 +77,9 @@ public class Player : MonoBehaviour
         fireSource.clip = fireSound;
         appleSource.clip = appleSound;
         wilheimSource.clip = wilheimSound;
+        walkingSource.clip = walkingSound;
+
+        
     }
 
     // Update is called once per frame
@@ -94,8 +97,6 @@ public class Player : MonoBehaviour
     void updateUI() 
     {
         txt_Score.text = "Score: " + ((int)transform.position.x-startCoordX);
-        txt_Health.text = "Health: " + (int)Food;
-        txt_Temperature.text = "Temperature: " + (int)Temprature;
     }
 
     void Movement()
@@ -113,15 +114,27 @@ public class Player : MonoBehaviour
         RuntimeAnimatorController an;
         if (speed > 0 ) 
         {
-             an = Resources.Load<RuntimeAnimatorController>("Animations/Player walking right");
+            an = Resources.Load<RuntimeAnimatorController>("Animations/Player walking right");
+            if (!walkingSource.isPlaying)
+            {
+                walkingSource.Play();
+                walkingSource.loop = true;
+            }
         }
         else if(speed < 0) 
         {
             an = Resources.Load<RuntimeAnimatorController>("Animations/Player walking left");
+            if (!walkingSource.isPlaying)
+            {
+                walkingSource.Play();
+                walkingSource.loop = true;
+            }
         }
         else 
         {
             an = null;
+            if (walkingSource.isPlaying) walkingSource.loop = false;
+
         }
         anim.runtimeAnimatorController = an;
 
