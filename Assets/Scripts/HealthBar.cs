@@ -5,7 +5,8 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
-    public Transform bar;
+    public Transform bar; 
+    public SpriteRenderer barRender;
 
     private static float barsize;
 
@@ -16,11 +17,40 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
+
         if (gameObject.name == "HealthBar")
         {
             barsize = Player.Food / 100;
+
+            if (barsize > 0.3)
+            {
+                barRender.color = Color.green;
+            } else barRender.color = Color.red;
+
+
+
+
         }
-        else barsize = Player.Temprature / 100;
+        else {
+            barsize = Player.Temprature / 100;
+
+            if(barsize > 0.9)
+            {
+                barRender.color = Color.red;
+            }
+
+            if (barsize < 0.9 && barsize > 0.2)
+            {
+                barRender.color = Color.yellow;
+            }
+
+            if(barsize < 0.2)
+            {
+                barRender.color = Color.cyan;
+            }
+
+
+        }
 
         SetSize(barsize);
     }
