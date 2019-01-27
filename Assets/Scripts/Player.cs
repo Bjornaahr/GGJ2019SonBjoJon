@@ -109,6 +109,22 @@ public class Player : MonoBehaviour
 
         rigidbod.velocity = new Vector2(speed - windSpeed, rigidbod.velocity.y);
 
+        Animator anim = this.GetComponent<Animator>();
+        RuntimeAnimatorController an;
+        if (speed > 0 ) 
+        {
+             an = Resources.Load<RuntimeAnimatorController>("Animations/Player walking right");
+        }
+        else if(speed < 0) 
+        {
+            an = Resources.Load<RuntimeAnimatorController>("Animations/Player walking left");
+        }
+        else 
+        {
+            an = null;
+        }
+        anim.runtimeAnimatorController = an;
+
     }
 
     void CheckGround()
