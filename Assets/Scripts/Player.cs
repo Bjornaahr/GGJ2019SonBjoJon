@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     float timeNow;
 
     bool isNearFire = false;
+    [SerializeField]
     bool isDead = false;
 
     public Text txt_Score;
@@ -133,10 +134,12 @@ public class Player : MonoBehaviour
     void TempratureHandler()
     {
         //Check if player is near fire and raise or lower temp
-        if (!isNearFire && !isDead)
-        {
-            Temprature -= (timeNow / 5000);
-        } else Temprature += 0.005f;
+        if (!isDead) {
+            if (!isNearFire)
+            {
+                Temprature -= (timeNow / 5000);
+            } else Temprature += 0.005f;
+        }
  
         //Kills the player :)
         if(Temprature <= 21 && !isNearFire && !isDead)
