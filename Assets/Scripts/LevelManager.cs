@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour
             SpriteRenderer spriteRend = apple.AddComponent<SpriteRenderer>();
             Sprite s = Resources.Load<Sprite>("Sprites/apple");
             spriteRend.sprite = s;
+            spriteRend.sortingOrder = 1;
 
             BoxCollider2D box2d = apple.AddComponent<BoxCollider2D>();
             box2d.size = s.bounds.size;
@@ -100,6 +101,7 @@ public class LevelManager : MonoBehaviour
             SpriteRenderer spriteRend = fire.AddComponent<SpriteRenderer>();
             Sprite s = Resources.Load<Sprite>("Sprites/Bonfire");
             spriteRend.sprite = s;
+            spriteRend.sortingOrder = 1;
 
             CircleCollider2D box2d = fire.AddComponent<CircleCollider2D>();
             box2d.radius = 6f;
