@@ -48,6 +48,8 @@ public class LevelManager : MonoBehaviour
                 continue;
             }
 
+            if (hit.point.x < firstAppleSpawn) continue;
+
             GameObject apple = new GameObject();
 
             apple.tag = "Apple";
@@ -92,6 +94,9 @@ public class LevelManager : MonoBehaviour
                 fireSpawnInterval -= spawnIntervalIncrease;
                 continue;
             }
+
+            if (hit.point.x < firstFireSpawn) continue;
+
             GameObject fire = new GameObject();
 
             fire.tag = "Fire";
