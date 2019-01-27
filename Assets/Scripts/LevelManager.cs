@@ -13,14 +13,16 @@ public class LevelManager : MonoBehaviour
     public int minSpawnHeight = 2; //should be slightly above the ground  
     public float appleScale = 1f;
     public float fireScale = 1f;
+    public int firstAppleSpawn = 20;
+    public int firstFireSpawn = 30;
 
     public static int LAYER_COLLECTIBLES = 31;
 
     // Start is called before the first frame update
     void Start()
     {
-        int firstApple = Random.Range(1, 10);
-        int firstFire = Random.Range(5, 15);
+        int firstApple = Random.Range(1, 10) + firstAppleSpawn;
+        int firstFire = Random.Range(5, 15) + firstFireSpawn;
         List<int> spawnPostions = new List<int>();
         for(int i = firstApple; i < lvlWidth; i+= appleSpawnInterval) 
         {
@@ -40,7 +42,11 @@ public class LevelManager : MonoBehaviour
             int randomHeight = Random.Range(minSpawnHeight, lvlHeight);
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
 
+<<<<<<< HEAD
             if(hit.point == new Vector2(i, randomHeight)) {
+=======
+            if(hit.point == new Vector2(i, randomHeight) || hit.point.x.Equals(0f)) {
+>>>>>>> 762c1e799d7b917a91ca64d5b2ee674aa4dab4a8
                 i -= appleSpawnInterval;
                 appleSpawnInterval -= spawnIntervalIncrease;
                 continue;
@@ -60,7 +66,10 @@ public class LevelManager : MonoBehaviour
             BoxCollider2D box2d = apple.AddComponent<BoxCollider2D>();
             box2d.size = s.bounds.size;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 762c1e799d7b917a91ca64d5b2ee674aa4dab4a8
             apple.transform.position = new Vector3(hit.point.x, hit.point.y+0.5f);
         }
 
@@ -80,10 +89,16 @@ public class LevelManager : MonoBehaviour
             spawnPostions.Add(i);
 
             int randomHeight = Random.Range(minSpawnHeight, lvlHeight);
+<<<<<<< HEAD
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
 
             if (hit.point == new Vector2(i, randomHeight)){
                 Debug.Log("alarm");
+=======
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
+
+            if (hit.point == new Vector2(i, randomHeight) || hit.point.x.Equals(0f)){
+>>>>>>> 762c1e799d7b917a91ca64d5b2ee674aa4dab4a8
                 i -= fireSpawnInterval;
                 fireSpawnInterval -= spawnIntervalIncrease;
                 continue;
