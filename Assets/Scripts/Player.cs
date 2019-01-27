@@ -10,6 +10,12 @@ public class Player : MonoBehaviour
 
     public static float Food;      
     public static float Temprature;
+    public AudioClip fireSound;
+    public AudioSource fireSource;
+    public AudioClip appleSound;
+    public AudioSource appleSource;
+    public AudioClip wilheimSound;
+    public AudioSource wilheimSource;
 
     [SerializeField]
     float speed, jumpSpeed, windSpeed, acceleration;
@@ -68,6 +74,9 @@ public class Player : MonoBehaviour
         startCoordX = (int)transform.position.x;
         ReadDeath();
         restart.onClick.AddListener(Retry);
+        fireSource.clip = fireSound;
+        appleSource.clip = appleSound;
+        wilheimSource.clip = wilheimSound;
     }
 
     // Update is called once per frame
@@ -130,7 +139,6 @@ public class Player : MonoBehaviour
         {
             KillPlayer("Starvation");
         }
-
     }
 
     //Decreases temprature while not near a fireplace
@@ -162,15 +170,18 @@ public class Player : MonoBehaviour
         if (col.gameObject.tag == "Fire")
         {
             isNearFire = true;
+            fireSource.Play();
         }
 
         if(col.gameObject.tag == "Pit")
         {
             KillPlayer("Pit");
+            wilheimSource.Play();
         }
 
         if (col.gameObject.tag == "Apple")
         {
+            appleSource.Play();
             Destroy(col.gameObject);
             Debug.Log("I got them apples");
             //Gives more food and keeps value between 0 and 100
@@ -184,6 +195,7 @@ public class Player : MonoBehaviour
         if (col.gameObject.tag == "Fire")
         {
             isNearFire = false;
+            fireSource.Stop();
         }
     }
 
