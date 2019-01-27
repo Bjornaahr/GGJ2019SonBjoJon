@@ -118,7 +118,9 @@ public class Player : MonoBehaviour
     //Decreases food
     void FoodDecrease()
     {
-        Food -= (timeNow / 500);
+        if(!isDead){
+            Food -= (timeNow / 500);
+        }
 
         if(Food <= 0 && !isDead)
         {
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
     void TempratureHandler()
     {
         //Check if player is near fire and raise or lower temp
-        if (!isNearFire)
+        if (!isNearFire && !isDead)
         {
             Temprature -= (timeNow / 5000);
         } else Temprature += 0.005f;
