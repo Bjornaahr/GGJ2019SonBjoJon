@@ -161,7 +161,7 @@ public class Player : MonoBehaviour
     void FoodDecrease()
     {
         if(!isDead){
-            Food -= (timeNow / 500);
+            Food -= Mathf.Lerp(0.01f, 0.005f, Temprature / 99);
         }
 
         if(Food <= 0 && !isDead)
