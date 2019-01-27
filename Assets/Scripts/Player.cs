@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public static float Temprature;
     public AudioClip fireSound;
     public AudioSource fireSource;
+    public AudioClip appleSound;
+    public AudioSource appleSource;
 
     [SerializeField]
     float speed, jumpSpeed, windSpeed, acceleration;
@@ -68,6 +70,7 @@ public class Player : MonoBehaviour
         startCoordX = (int)transform.position.x;
         restart.onClick.AddListener(Retry);
         fireSource.clip = fireSound;
+        appleSource.clip = appleSound;
     }
 
     // Update is called once per frame
@@ -172,6 +175,7 @@ public class Player : MonoBehaviour
 
         if (col.gameObject.tag == "Apple")
         {
+            appleSource.Play();
             Destroy(col.gameObject);
             Debug.Log("I got them apples");
             //Gives more food and keeps value between 0 and 100
