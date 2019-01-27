@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     public static float Food;      
     public static float Temprature;
+    public AudioClip fireSound;
+    public AudioSource fireSource;
 
     [SerializeField]
     float speed, jumpSpeed, windSpeed, acceleration;
@@ -65,6 +67,7 @@ public class Player : MonoBehaviour
         Temprature = 37;
         startCoordX = (int)transform.position.x;
         restart.onClick.AddListener(Retry);
+        fireSource.clip = fireSound;
     }
 
     // Update is called once per frame
@@ -159,6 +162,7 @@ public class Player : MonoBehaviour
         if (col.gameObject.tag == "Fire")
         {
             isNearFire = true;
+            fireSource.Play();
         }
 
         if(col.gameObject.tag == "Pit")
@@ -181,6 +185,7 @@ public class Player : MonoBehaviour
         if (col.gameObject.tag == "Fire")
         {
             isNearFire = false;
+            fireSource.Stop();
         }
     }
 
