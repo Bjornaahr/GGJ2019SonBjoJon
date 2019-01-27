@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
 
             BoxCollider2D box2d = apple.AddComponent<BoxCollider2D>();
             box2d.size = s.bounds.size;
+            box2d.isTrigger = true;
 
             apple.transform.position = new Vector3(hit.point.x, hit.point.y+0.5f);
         }
