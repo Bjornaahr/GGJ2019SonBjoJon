@@ -9,6 +9,7 @@ TagManager:
   - Apple
   - Trees
   - Hills
+  - Pit
   layers:
   - Default
   - TransparentFX

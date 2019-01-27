@@ -81,6 +81,7 @@ public class LevelManager : MonoBehaviour
             spawnPostions.Add(i);
 
             int randomHeight = Random.Range(minSpawnHeight, lvlHeight);
+
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(i, randomHeight), new Vector2(0, -1));
 
             if (hit.point == new Vector2(i, randomHeight) || hit.point.x.Equals(0f)){

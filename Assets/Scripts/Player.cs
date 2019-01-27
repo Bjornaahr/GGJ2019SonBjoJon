@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
 
     void KillPlayer(string reason)
     {
-
+        isDead = true;
         DeathScreen.SetActive(true);
         windSpeed = 0;
         acceleration = 0;
