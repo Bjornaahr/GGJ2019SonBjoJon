@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public AudioSource fireSource;
     public AudioClip appleSound;
     public AudioSource appleSource;
+    public AudioClip wilheimSound;
+    public AudioSource wilheimSource;
 
     [SerializeField]
     float speed, jumpSpeed, windSpeed, acceleration;
@@ -71,6 +73,7 @@ public class Player : MonoBehaviour
         restart.onClick.AddListener(Retry);
         fireSource.clip = fireSound;
         appleSource.clip = appleSound;
+        wilheimSource.clip = wilheimSound;
     }
 
     // Update is called once per frame
@@ -133,7 +136,6 @@ public class Player : MonoBehaviour
         {
             KillPlayer("Starvation");
         }
-
     }
 
     //Decreases temprature while not near a fireplace
@@ -171,6 +173,7 @@ public class Player : MonoBehaviour
         if(col.gameObject.tag == "Pit")
         {
             KillPlayer("Pit");
+            wilheimSource.Play();
         }
 
         if (col.gameObject.tag == "Apple")
