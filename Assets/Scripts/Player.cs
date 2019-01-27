@@ -162,7 +162,6 @@ public class Player : MonoBehaviour
     {
         if(!isDead){
             Food -= Mathf.Lerp(0.01f, 0.005f, Temprature / 99);
-            Debug.Log(Mathf.Lerp(0.01f, 0.005f, Temprature / 99));
         }
 
         if(Food <= 0 && !isDead)
