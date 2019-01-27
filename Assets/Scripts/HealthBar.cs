@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private Transform bar;
+    [SerializeField]
+    public Transform bar;
+
+    private static float barsize;
+
     void Start()
     {
-        Transform bar = transform.Find("Bar");
+        SetSize(1f);
     }
 
-    public void SetSize(float normalized) {
+    void Update()
+    {
+        if (gameObject.name == "HealthBar")
+        {
+            barsize = Player.Food / 100;
+        }
+        else barsize = Player.Temprature / 100;
+
+        SetSize(barsize);
+    }
+
+    void SetSize(float normalized) {
         bar.localScale = new Vector3(normalized, 1f);
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public float Food;      
-    public float Temprature;
+    public static float Food;      
+    public static float Temprature;
 
     [SerializeField]
     float speed, jumpSpeed, windSpeed, acceleration;

@@ -10,6 +10,7 @@ TagManager:
   - Trees
   - Hills
   - Pit
+  - HealthBar
   layers:
   - Default
   - TransparentFX
