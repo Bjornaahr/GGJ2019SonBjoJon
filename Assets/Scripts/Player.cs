@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
@@ -46,17 +47,18 @@ public class Player : MonoBehaviour
 
 
     [SerializeField]
-    string[] messagePit;
+    List<string> messagePit;
     [SerializeField]
-    string[] messageFood;
+    List<string> messageFood;
     [SerializeField]
-    string[] messageFreezing;
+    List<string> messageFreezing;
     [SerializeField]
-    string[] messageOverheating;
+    List<string> messageOverheating;
+    [SerializeField]
+    List<string> messageGeneral;
 
 
 
-    
     void Awake()
     {
         DeathScreen.SetActive(false);
@@ -68,8 +70,9 @@ public class Player : MonoBehaviour
         rigidbod = GetComponent<Rigidbody2D>();
         startTime = Time.time;
         Food = 100;
-        Temprature = 37;
+        Temprature = 100;
         startCoordX = (int)transform.position.x;
+        ReadDeath();
         restart.onClick.AddListener(Retry);
         fireSource.clip = fireSound;
         appleSource.clip = appleSound;
@@ -145,17 +148,17 @@ public class Player : MonoBehaviour
         if (!isDead) {
             if (!isNearFire)
             {
-                Temprature -= (timeNow / 5000);
+                Temprature -= (timeNow / 1000);
             } else Temprature += 0.005f;
         }
  
         //Kills the player :)
-        if(Temprature <= 21 && !isNearFire && !isDead)
+        if(Temprature <= 0 && !isNearFire && !isDead)
         {
             KillPlayer("Hypothermia");
         }
 
-        if(Temprature >= 44 && isNearFire && !isDead)
+        if(Temprature >= 100 && isNearFire && !isDead)
         {
             KillPlayer("Hyperthermia");
         }
@@ -204,25 +207,31 @@ public class Player : MonoBehaviour
         acceleration = 0;
         jumpSpeed = 0;
 
+
+        int i = Random.Range(0, 10);
+        if (i < 5) {
+            txt_DeathMessage.text = messageGeneral[Random.Range(0, messageGeneral.Count)];
+        }
+
         if(reason == "Pit")
         {
-
+          txt_DeathMessage.text = messagePit[Random.Range(0, messagePit.Count)];
         }
 
         if(reason == "Starvation")
         {
-            txt_DeathMessage.text = messageFood[Random.Range(0, messageFood.Length)];
+            txt_DeathMessage.text = messageFood[Random.Range(0, messageFood.Count)];
         }
 
         if(reason == "Hypothermia")
         {
-            txt_DeathMessage.text = messageFreezing[Random.Range(0, messageFreezing.Length)];
+            txt_DeathMessage.text = messageFreezing[Random.Range(0, messageFreezing.Count)];
 
         }
 
         if(reason == "Hyperthermia")
         {
-            txt_DeathMessage.text = messageOverheating[Random.Range(0, messageOverheating.Length)];
+            txt_DeathMessage.text = messageOverheating[Random.Range(0, messageOverheating.Count)];
         }
 
     }
@@ -230,6 +239,37 @@ public class Player : MonoBehaviour
     void Retry()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+    void ReadDeath()
+    {
+        string path = "Assets/Text/Death messages.txt";
+        StreamReader reader = new StreamReader(path);
+        string line;
+        reader.ReadLine();
+        while ((line = reader.ReadLine()) != "--Falls--")
+        {
+            messageGeneral.Add(line);
+        }
+
+        while ((line = reader.ReadLine()) != "--Fire--")
+        {
+            messagePit.Add(line);
+        }
+
+        while ((line = reader.ReadLine()) != "--Apples--")
+        {
+            messageFreezing.Add(line);
+        }
+
+        while ((line = reader.ReadLine()) != null)
+        {
+            messageFood.Add(line);
+        }
+
+
+
+        reader.Close();
     }
 
 }
